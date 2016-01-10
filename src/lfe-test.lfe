@@ -26,7 +26,7 @@
     `#(ok ,(rebar_state:add_provider state provider))))
 
 (defun do (state)
-  (lfe_io:format "~p" `(,(lfe-version-util:get-versions)))
+  (lfe_io:format "~p" `(,state)
   `#(ok ,state))
 
 (defun format_error (reason)
@@ -39,7 +39,7 @@
 (defun info (desc)
   (io_lib:format
     (++ "~n~s~n~n"
-        "Display the version info for LFE as well as major components "
-        "of Erlang/OTP.~n"
+        "Run the unit, system, and integration tests "
+        "for the project.~n"
         "~n")
     `(,desc)))
