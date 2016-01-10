@@ -26,7 +26,7 @@
     `#(ok ,(rebar_state:add_provider state provider))))
 
 (defun do (state)
-  (lfe_io:format "~p" `(,state)
+  (lfe_io:format "~p" `(,state))
   `#(ok ,state))
 
 (defun format_error (reason)
