@@ -2,7 +2,7 @@
 
 *The LFE rebar3 test plugin*
 
-<img src="resources/images/logo.png" />
+<img src="priv/images/logo.png" />
 
 
 ## Build
