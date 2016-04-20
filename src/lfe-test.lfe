@@ -16,10 +16,11 @@
                  #(module ,(MODULE))
                  #(namespace ,(namespace))
                  #(opts (#(test-type #\t "test-type" atom
-                           ,(++ "Type of test to run. Valid types are "
-                                "'unit', 'system', 'integration', and "
-                                "'all'. If no type is provided, 'all' "
-                                "is assumed."))))
+                           ,(++ "Type of test to run. Valid types are:\n"
+                                (lr3-tst-validate:format-test-types)
+                                "\nIf no type is provided, '"
+                                (lr3-tst-validate:format-default-type)
+                                "' is assumed."))))
                  #(deps ,(deps))
                  #(example "rebar3 lfe test")
                  #(short_desc ,(short-desc))
@@ -30,11 +31,12 @@
 
 (defun do (state)
   (rebar_api:info "Running tests ..." '())
-  (let ((raw-args (rebar_state:command_args state))
-        (args (rebar_state:command_parsed_args state)))
-    (rebar_api:info "Got raw args: ~p" `(,raw-args))
-    (rebar_api:info "Got args: ~p" `(,args))
-    `#(ok ,state)))
+  (let ((args (rebar_state:command_parsed_args state)))
+    (rebar_api:info "Got args: ~p" `(,args)))
+  (case (rebar_state:command_parsed_args state)
+    (_ (ltest-runner:all)))
+  `#(ok ,state))
+
 
 (defun format_error (reason)
   (io_lib:format "~p" `(,reason)))
