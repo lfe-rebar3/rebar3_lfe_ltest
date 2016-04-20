@@ -44,6 +44,8 @@
       (ltest-runner:system))
     (`#((#(test-type integration)) ,_)
       (ltest-runner:integration))
+    (`#((#(test-type ,type)) ,_)
+      (rebar_api:error "Unknown test-type value: ~p" `(,type)))
     ;; With additional args
     (`#((#(test-type all) ,_) ,_)
       (ltest-runner:all))
@@ -53,7 +55,9 @@
       (ltest-runner:system))
     (`#((#(test-type integration) ,_) ,_)
       (ltest-runner:integration))
-    (_ (rebar_api:error "Unknown test-type value." '())))
+    (`#((#(test-type ,type) ,_) ,_)
+      (rebar_api:error "Unknown test-type value: ~p" `(,type)))
+    (_ (rebar_api:error "Unknown option(s) or argument(s)." '())))
   `#(ok ,state))
 
 (defun format_error (reason)
