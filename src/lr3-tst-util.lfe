@@ -24,4 +24,3 @@
       #(driver-version ,(erlang:system_info 'driver_version))
       #(lfe ,(get-lfe-version))
       #(rebar ,rebar-version))))
-
