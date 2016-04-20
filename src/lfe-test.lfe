@@ -45,10 +45,10 @@
     (_ (rebar_api:error "Unknown test-type value.")))
   `#(ok ,state))
 
-{[{'test-type',all},{task,"things"}],[]}
+; {[{'test-type',all},{task,"things"}],[]}
 
-#((#(test-type all) #()) ())
-#((#(test-type all) ,_) ,_)
+; #((#(test-type all) #()) ())
+; #((#(test-type all) ,_) ,_)
 
 (defun format_error (reason)
   (io_lib:format "~p" `(,reason)))
