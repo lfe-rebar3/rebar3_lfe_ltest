@@ -2,11 +2,10 @@
   (behaviour provider)
   (export all))
 
-(defun namespace () 'lfe)                   ; All LFE plugsin need to have this
+(defun namespace () 'lfe)
 (defun provider-name () 'test)
 (defun short-desc () "The LFE rebar3 test plugin.")
-(defun deps ()
-  '(#(default app_discovery)))
+(defun deps () '(#(default app_discovery)))
 
 ;;;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;;; Public API
@@ -26,7 +25,7 @@
     `#(ok ,(rebar_state:add_provider state provider))))
 
 (defun do (state)
-  (lfe_io:format "~p" `(,state))
+  (rebar_api:info "Running tests ..." '())
   `#(ok ,state))
 
 (defun format_error (reason)
