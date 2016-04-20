@@ -15,12 +15,7 @@
   text."
   (string:join (lists:map #'atom_to_list/1 (legal-test-types)) ", "))
 
-(defun validate-option
-  ""
-  ((`#(,key ,val) pred)
-    'noop))
-
 (defun validate-test-type
-  ""
+  "Ensure that the passed option is allowed."
   ((`#(type-test ,test-type))
     'noop))
