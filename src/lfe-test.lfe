@@ -53,7 +53,7 @@
       (ltest-runner:system))
     (`#((#(test-type integration) ,_) ,_)
       (ltest-runner:integration))
-    (_ (rebar_api:error "Unknown test-type value.")))
+    (_ (rebar_api:error "Unknown test-type value." '())))
   `#(ok ,state))
 
 (defun format_error (reason)
