@@ -28,7 +28,7 @@
   (rebar_api:info "Running tests ..." '())
   (let ((args (rebar_state:command_args state)))
     (rebar_api:info "Got args: " `(,args))
-  `#(ok ,state))
+    `#(ok ,state)))
 
 (defun format_error (reason)
   (io_lib:format "~p" `(,reason)))
