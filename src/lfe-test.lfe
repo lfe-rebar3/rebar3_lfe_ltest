@@ -34,9 +34,16 @@
   (let ((args (rebar_state:command_parsed_args state)))
     (rebar_api:info "Got args: ~p" `(,args)))
   (case (rebar_state:command_parsed_args state)
-    (_ (ltest-runner:all)))
+    (#((#(test-type all) _))
+      (ltest-runner:all))
+    (#((#(test-type unit) _))
+      (ltest-runner:unit))
+    (#((#(test-type system) _))
+      (ltest-runner:system))
+    (#((#(test-type integration) _))
+      (ltest-runner:integration))
+    (_ (rebar_api:error "Unknown test-type value.")))
   `#(ok ,state))
-
 
 (defun format_error (reason)
   (io_lib:format "~p" `(,reason)))
