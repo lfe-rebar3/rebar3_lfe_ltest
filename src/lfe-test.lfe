@@ -34,6 +34,16 @@
   (let ((args (rebar_state:command_parsed_args state)))
     (rebar_api:info "Got args: ~p" `(,args)))
   (case (rebar_state:command_parsed_args state)
+    ;; With no additional args
+    (`#((#(test-type all)) ,_)
+      (ltest-runner:all))
+    (`#((#(test-type unit)) ,_)
+      (ltest-runner:unit))
+    (`#((#(test-type system)) ,_)
+      (ltest-runner:system))
+    (`#((#(test-type integration)) ,_)
+      (ltest-runner:integration))
+    ;; With additional args
     (`#((#(test-type all) ,_) ,_)
       (ltest-runner:all))
     (`#((#(test-type unit) ,_) ,_)
@@ -46,6 +56,7 @@
   `#(ok ,state))
 
 ; {[{'test-type',all},{task,"things"}],[]}
+; {[{'test-type',all}],[]}
 
 ; #((#(test-type all) #()) ())
 ; #((#(test-type all) ,_) ,_)
