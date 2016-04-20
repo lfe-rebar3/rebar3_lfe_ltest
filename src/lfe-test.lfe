@@ -31,8 +31,6 @@
 
 (defun do (state)
   (rebar_api:info "Running tests ..." '())
-  (let ((args (rebar_state:command_parsed_args state)))
-    (rebar_api:info "Got args: ~p" `(,args)))
   (case (rebar_state:command_parsed_args state)
     ;; empty opts & args -- use default
     (#(() ())
@@ -58,12 +56,6 @@
     (_ (rebar_api:error "Unknown test-type value.")))
   `#(ok ,state))
 
-; {[{'test-type',all},{task,"things"}],[]}
-; {[{'test-type',all}],[]}
-
-; #((#(test-type all) #()) ())
-; #((#(test-type all) ,_) ,_)
-
 (defun format_error (reason)
   (io_lib:format "~p" `(,reason)))
 
@@ -78,12 +70,3 @@
         "for the project.~n"
         "~n")
     `(,desc)))
-
-(defun help (x)
-  (io:format "~nGot help stuff: ~p~n" `(,x)))
-
-(defun format_help (x)
-  (io:format "~nGot format_help stuff: ~p~n" `(,x)))
-
-(defun display_help (x)
-  (io:format "~nGot display_help stuff: ~p~n" `(,x)))
