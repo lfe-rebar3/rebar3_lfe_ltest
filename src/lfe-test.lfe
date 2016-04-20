@@ -19,7 +19,7 @@
                            ,(++ "Type of test to run. Valid types are "
                                 "'unit', 'system', 'integration', and "
                                 "'all'. If no type is provided, 'all' "
-                                "is assumed.")))
+                                "is assumed."))))
                  #(deps ,(deps))
                  #(example "rebar3 lfe test")
                  #(short_desc ,(short-desc))
