@@ -12,21 +12,27 @@
 ;;;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 (defun init (state)
-  (let* ((opts `(#(name ,(provider-name))        ; The 'user friendly' name
-                 #(module ,(MODULE))             ; The module implementation
-                 #(namespace ,(namespace))       ; Plugin namespace
-                 #(opts ())                      ; List of plugin options
-                 #(deps ,(deps))                 ; The list of dependencies
-                 #(example "rebar3 lfe test")    ; How to use the plugin
-                 #(short_desc ,(short-desc))     ; A one-line description
-                 #(desc ,(info (short-desc)))    ; A longer description
-                 #(bare true)))                  ; The task can be run by user
+  (let* ((opts `(#(name ,(provider-name))
+                 #(module ,(MODULE))
+                 #(namespace ,(namespace))
+                 #(opts (#(test-type #\t "test-type" atom
+                           ,(++ "Type of test to run. Valid types are "
+                                "'unit', 'system', 'integration', and "
+                                "'all'. If no type is provided, 'all' "
+                                "is assumed.")))
+                 #(deps ,(deps))
+                 #(example "rebar3 lfe test")
+                 #(short_desc ,(short-desc))
+                 #(desc ,(info (short-desc)))
+                 #(bare true)))
          (provider (providers:create opts)))
     `#(ok ,(rebar_state:add_provider state provider))))
 
 (defun do (state)
   (rebar_api:info "Running tests ..." '())
-  (let ((args (rebar_state:command_args state)))
+  (let ((raw-args (rebar_state:command_args state))
+        (args (rebar_state:command_parsed_args state)))
+    (rebar_api:info "Got raw args: ~p" `(,raw-args))
     (rebar_api:info "Got args: ~p" `(,args))
     `#(ok ,state)))
 
