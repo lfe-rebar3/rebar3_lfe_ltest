@@ -44,3 +44,6 @@
         "for the project.~n"
         "~n")
     `(,desc)))
+
+(defun help (x)
+  (io_lib:format "~nGot help stuff: ~p~n" `(,x)))
