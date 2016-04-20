@@ -34,6 +34,9 @@
   (let ((args (rebar_state:command_parsed_args state)))
     (rebar_api:info "Got args: ~p" `(,args)))
   (case (rebar_state:command_parsed_args state)
+    ;; empty opts & args -- use default
+    (#(() ())
+      (call 'ltest-runner (lr3-tst-validate:default-type)))
     ;; With no additional args
     (`#((#(test-type all)) ,_)
       (ltest-runner:all))
