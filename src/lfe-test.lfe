@@ -26,6 +26,8 @@
 
 (defun do (state)
   (rebar_api:info "Running tests ..." '())
+  (let ((args (rebar_state:command_args state)))
+    (rebar_api:info "Got args: " `(,args))
   `#(ok ,state))
 
 (defun format_error (reason)
