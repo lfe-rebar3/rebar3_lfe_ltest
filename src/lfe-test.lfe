@@ -15,7 +15,7 @@
   (let* ((opts `(#(name ,(provider-name))        ; The 'user friendly' name
                  #(module ,(MODULE))             ; The module implementation
                  #(namespace ,(namespace))       ; Plugin namespace
-                 #(opts (#(cmd undefined undefined atom all "Test type")))                      ; List of plugin options
+                 #(opts ())                      ; List of plugin options
                  #(deps ,(deps))                 ; The list of dependencies
                  #(example "rebar3 lfe test")    ; How to use the plugin
                  #(short_desc ,(short-desc))     ; A one-line description
