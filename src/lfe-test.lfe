@@ -17,9 +17,9 @@
                  #(namespace ,(namespace))
                  #(opts (#(test-type #\t "test-type" atom
                            ,(++ "Type of test to run. Valid types are: "
-                                (lr3-tst-validate:format-test-types)
+                                (format-test-types)
                                 ". If no type is provided, '"
-                                (lr3-tst-validate:format-default-type)
+                                (format-default-type)
                                 "' is assumed."))))
                  #(deps ,(deps))
                  #(example "rebar3 lfe test")
@@ -34,7 +34,7 @@
   (case (rebar_state:command_parsed_args state)
     ;; empty opts & args -- use default
     (#(() ())
-      (call 'ltest-runner (lr3-tst-validate:default-type)))
+      (call 'ltest-runner (default-type)))
     ;; With no additional args
     (`#((#(test-type all)) ,_)
       (ltest-runner:all))
@@ -74,3 +74,17 @@
         "for the project.~n"
         "~n")
     `(,desc)))
+
+(defun default-type () 'all)
+
+(defun format-default-type ()
+  (atom_to_list (default-type)))
+
+(defun legal-test-types ()
+  "Get the list of allowed test types."
+  `(unit system integration ,(default-type)))
+
+(defun format-test-types ()
+  "Format the list of allowed types in a manner suitable for inclusion in help
+  text."
+  (string:join (lists:map #'atom_to_list/1 (legal-test-types)) ", "))
