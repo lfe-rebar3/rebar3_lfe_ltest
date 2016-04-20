@@ -16,9 +16,9 @@
                  #(module ,(MODULE))
                  #(namespace ,(namespace))
                  #(opts (#(test-type #\t "test-type" atom
-                           ,(++ "Type of test to run. Valid types are:\n"
+                           ,(++ "Type of test to run. Valid types are: "
                                 (lr3-tst-validate:format-test-types)
-                                "\nIf no type is provided, '"
+                                ". If no type is provided, '"
                                 (lr3-tst-validate:format-default-type)
                                 "' is assumed."))))
                  #(deps ,(deps))
