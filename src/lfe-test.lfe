@@ -30,7 +30,7 @@
     `#(ok ,(rebar_state:add_provider state provider))))
 
 (defun do (state)
-  (rebar_api:info "Running tests ..." '())
+  (rebar_api:info "Running tests ...\n" '())
   (case (rebar_state:command_parsed_args state)
     ;; empty opts & args -- use default
     (#(() ())
