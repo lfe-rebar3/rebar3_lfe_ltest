@@ -46,4 +46,10 @@
     `(,desc)))
 
 (defun help (x)
-  (io_lib:format "~nGot help stuff: ~p~n" `(,x)))
+  (io:format "~nGot help stuff: ~p~n" `(,x)))
+
+(defun format_help (x)
+  (io:format "~nGot format_help stuff: ~p~n" `(,x)))
+
+(defun display_help (x)
+  (io:format "~nGot display_help stuff: ~p~n" `(,x)))
