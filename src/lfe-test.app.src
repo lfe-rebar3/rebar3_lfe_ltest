@@ -1,11 +1,20 @@
 {application, 'lfe-test',
  [{description, "The LFE rebar3 test plugin"},
-  {vsn, "0.3.0"},
+  {vsn, "0.4.0-rc1"},
   {registered, []},
   {applications,
    [kernel,
     stdlib
    ]},
   {env,[]},
-  {modules, []}
+  {modules, []},
+  %% Hex.pm metadata
+  {pkg_name, rebar3_lfe_test},
+  {maintainers, ["Duncan McGreggor"]},
+  {licenses, ["BSD-3"]},
+  {links,
+   [{"GitHub", "https://github.com/lfe-rebar3/test"},
+    {"Gitlab", "https://gitlab.com/lfe-rebar3/test"},
+    {"Hex", "https://hex.pm/packages/rebar3_lfe_test"}
+   ]}
  ]}.
