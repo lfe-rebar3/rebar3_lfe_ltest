@@ -5,7 +5,8 @@
 (defun namespace () 'lfe)
 (defun provider-name () 'test)
 (defun short-desc () "The LFE rebar3 test plugin.")
-(defun deps () '(#(default app_discovery)))
+(defun deps () '(#(default app_discovery)
+                 #(default compile)))
 
 ;;;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;;; Public API
@@ -30,6 +31,7 @@
     `#(ok ,(rebar_state:add_provider state provider))))
 
 (defun do (state)
+  (rebar_api:debug "Paths: ~n~p" `(,(code:get_path)))
   (rebar_api:info "Running tests ...\n" '())
   (case (rebar_state:command_parsed_args state)
     ;; empty opts & args -- use default
