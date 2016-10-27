@@ -6,7 +6,8 @@
 (defun provider-name () 'test)
 (defun short-desc () "The LFE rebar3 test plugin.")
 (defun deps () '(#(default app_discovery)
-                 #(default compile)))
+                 #(default compile)
+                 #(default lock)))
 
 ;;;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 ;;; Public API
