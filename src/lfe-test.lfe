@@ -32,7 +32,7 @@
 
 (defun do (state)
   (rebar_api:debug "Paths: ~n~p" `(,(code:get_path)))
-  (rebar_api:info "Running tests ...\n" '())
+  (rebar_api:info "Running test framework ...\n" '())
   (case (rebar_state:command_parsed_args state)
     ;; empty opts & args -- use default
     (#(() ())
