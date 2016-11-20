@@ -1,6 +1,6 @@
 {application, 'lfe-test',
  [{description, "The LFE rebar3 test plugin"},
-  {vsn, "0.4.0-rc2"},
+  {vsn, "0.4.0-rc3"},
   {registered, []},
   {applications,
    [kernel,
