@@ -35,33 +35,20 @@
 (defun do (state)
   (rebar_api:debug "Paths: ~n~p" `(,(code:get_path)))
   (rebar_api:info "Running test framework ...\n" '())
-  (case (rebar_state:command_parsed_args state)
-    ;; empty opts & args -- use default
-    (#(() ())
-      (call 'ltest-runner (default-type)))
-    ;; With no additional args
-    (`#((#(test-type all)) ,_)
+
+  (case (effective-test-type state)
+    (`all
       (ltest-runner:all))
-    (`#((#(test-type unit)) ,_)
+    (`unit
       (ltest-runner:unit))
-    (`#((#(test-type system)) ,_)
+    (`system
       (ltest-runner:system))
-    (`#((#(test-type integration)) ,_)
+    (`integration
       (ltest-runner:integration))
-    (`#((#(test-type ,type)) ,_)
+    (type
       (rebar_api:error "Unknown test-type value: ~p" `(,type)))
-    ;; With additional args
-    (`#((#(test-type all) ,_) ,_)
-      (ltest-runner:all))
-    (`#((#(test-type unit) ,_) ,_)
-      (ltest-runner:unit))
-    (`#((#(test-type system) ,_) ,_)
-      (ltest-runner:system))
-    (`#((#(test-type integration) ,_) ,_)
-      (ltest-runner:integration))
-    (`#((#(test-type ,type) ,_) ,_)
-      (rebar_api:error "Unknown test-type value: ~p" `(,type)))
-    (_ (rebar_api:error "Unknown option(s) or argument(s)." '())))
+    (_
+      (rebar_api:error "Unknown option(s) or argument(s)." '())))
   `#(ok ,state))
 
 (defun format_error (reason)
@@ -92,3 +79,16 @@
   "Format the list of allowed types in a manner suitable for inclusion in help
   text."
   (string:join (lists:map #'atom_to_list/1 (legal-test-types)) ", "))
+
+(defun effective-test-type (state)
+  "Calculate effective test type based on command parsed args, rebar.config and
+  default test-type value"
+  (let* ((cmd-args (element 1 (rebar_state:command_parsed_args state)))
+         (state-args (rebar_state:get state (provider-name) []))
+         (type-from-cmd (proplists:get_value 'test-type cmd-args))
+         (type-from-state (proplists:get_value 'test-type state-args)))
+    (if (=:= 'undefined type-from-cmd)
+        (if (=:= 'undefined type-from-state)
+            (default-type)
+            type-from-state)
+        type-from-cmd)))
