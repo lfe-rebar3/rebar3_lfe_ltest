@@ -27,7 +27,7 @@ Add the plugin to your ``rebar.config``:
 ]}.
 ```
 
-Then just call your plugin directly from your project directory:
+Then just use the plugin directly from your project directory:
 
 ```bash
 $ rebar3 help lfe test
