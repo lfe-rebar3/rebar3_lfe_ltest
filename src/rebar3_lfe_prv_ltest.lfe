@@ -1,12 +1,13 @@
 (defmodule rebar3_lfe_prv_ltest
-  (behaviour provider)
-  (export all))
+  (export
+    (init 1)
+    (do 1)
+    (format_error 1)))
 
 (defun namespace () 'lfe)
 (defun provider-name () 'ltest)
 (defun short-desc () "The LFE rebar3 ltest plugin.")
-(defun deps () '(#(default app_discovery)
-                 #(default compile)
+(defun deps () '(#(default compile)
                  #(lfe compile)
                  #(default lock)))
 
