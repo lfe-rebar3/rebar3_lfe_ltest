@@ -1,4 +1,4 @@
-(defmodule lfe-ltest
+(defmodule rebar3_lfe_prv_ltest
   (behaviour provider)
   (export all))
 

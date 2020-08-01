@@ -1,4 +1,4 @@
-{application, 'lfe-ltest',
+{application, rebar3_lfe_ltest,
  [{description, "The LFE rebar3 ltest plugin"},
   {vsn, "0.4.0"},
   {registered, []},
