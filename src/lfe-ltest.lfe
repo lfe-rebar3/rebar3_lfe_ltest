@@ -1,10 +1,10 @@
-(defmodule lfe-test
+(defmodule lfe-ltest
   (behaviour provider)
   (export all))
 
 (defun namespace () 'lfe)
-(defun provider-name () 'test)
-(defun short-desc () "The LFE rebar3 test plugin.")
+(defun provider-name () 'ltest)
+(defun short-desc () "The LFE rebar3 ltest plugin.")
 (defun deps () '(#(default app_discovery)
                  #(default compile)
                  #(lfe compile)
@@ -25,7 +25,7 @@
                                 (format-default-type)
                                 "' is assumed."))))
                  #(deps ,(deps))
-                 #(example "rebar3 lfe test")
+                 #(example "rebar3 lfe ltest")
                  #(short_desc ,(short-desc))
                  #(desc ,(info (short-desc)))
                  #(bare true)))
