@@ -16,20 +16,20 @@
 ;;;>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 (defun init (state)
-  (let* ((opts `(#(name ,(provider-name))
+  (let* ((opts `(#(namespace ,(namespace))
+                 #(name ,(provider-name))
                  #(module ,(MODULE))
-                 #(namespace ,(namespace))
+                 #(bare true)
+                 #(deps ,(deps))
+                 #(example "rebar3 lfe ltest")
                  #(opts (#(test-type #\t "test-type" atom
                            ,(++ "Type of test to run. Valid types are: "
                                 (format-test-types)
                                 ". If no type is provided, '"
                                 (format-default-type)
                                 "' is assumed."))))
-                 #(deps ,(deps))
-                 #(example "rebar3 lfe ltest")
                  #(short_desc ,(short-desc))
-                 #(desc ,(info (short-desc)))
-                 #(bare true)))
+                 #(desc ,(info (short-desc)))))
          (provider (providers:create opts)))
     `#(ok ,(rebar_state:add_provider state provider))))
 
@@ -47,9 +47,7 @@
     (`integration
       (ltest-runner:integration))
     (type
-      (rebar_api:error "Unknown test-type value: ~p" `(,type)))
-    (_
-      (rebar_api:error "Unknown option(s) or argument(s)." '())))
+      (rebar_api:error "Unknown test-type value: ~p" `(,type))))
   `#(ok ,state))
 
 (defun format_error (reason)
