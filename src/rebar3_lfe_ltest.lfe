@@ -3,6 +3,7 @@
     (init 1)))
 
 (defun init (state)
+  (rebar_api:debug "Initializing rebar3_lfe_ltest plugin ...")
   (lists:foldl
     (lambda
       ((fun `#(ok, state))
